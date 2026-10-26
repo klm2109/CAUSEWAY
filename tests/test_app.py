@@ -1,7 +1,5 @@
-import os
 from fastapi.testclient import TestClient
 
-os.environ["CAUSEWAY_DB"] = ":memory:" if False else "/tmp/causeway_atlas_test.sqlite3"
 from app import app  # noqa: E402
 
 client = TestClient(app)

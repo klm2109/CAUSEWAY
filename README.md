@@ -1,16 +1,18 @@
 # CAUSEWAY — Long COVID Atlas (v0.1 Meeting Prototype)
 
-A clickable, **non-clinical** prototype for the Long COVID Atlas/CAUSEWAY concept from the meeting notes. It demonstrates three portal tabs, a shared evidence catalogue, and a proposed AI-agent tool route. It is **not** approved diagnostic, predictive, or prescribing software.
+A clickable, **non-clinical** prototype for the Long COVID Atlas/CAUSEWAY concept from the meeting notes. It demonstrates three portal tabs, a shared evidence catalogue, cross-paper method planning and a first TACO evidence/readiness MCP server. It is **not** approved diagnostic, predictive, or prescribing software.
+
+The current work is tracked in [TASKS.md](TASKS.md). Start with the [beginner guide](docs/BEGINNER_GUIDE.md). The active scope is the TACO agent and portal updates; presentation work is skipped at your request.
 
 ## Fastest way to demo
 
 Open `CAUSEWAY_demo.html` in a modern web browser. No installation, account, database, or internet connection is required. It includes a small embedded **reference dataset** from the accompanying research papers and will not store real patient information.
 
-For the demo: select symptoms in **Patient** (or click **Load fictional example**), switch to **Doctor** to inspect the same in-memory symptom selections and mark a *demo-only review*, then go to **Researcher** to filter 11 genes by method and inspect the REVIEW summary and planned AI-agent actions.
+For the demo: click **Load fictional example** in **Patient**, then add/remove other conditions and current medicines. In **Doctor**, inspect the shared session history and exact symptom-rule explanations. In **Researcher**, open the [Shiny explorer](https://sindypin.shinyapps.io/github/), compare ten core method components, build a proposed combination, filter the 11-gene subset, and inspect REVIEW. TACO evidence/readiness tool execution requires the local server. The website has no LLM chat connection or scientific prediction execution.
 
 ## Run the local database-backed prototype
 
-Requires Python 3.10+.
+Requires Python 3.10+ for the portal; Python 3.11+ for the optional MCP agent.
 
 Windows PowerShell:
 
@@ -28,10 +30,17 @@ API routes:
 - `GET /api/health`
 - `GET /api/catalogue` — evidence modules, 11 gene support records, review table
 - `GET /api/genes?method=MR&search=STAT3`
+- `GET /api/research-methods` — method catalogue and reference/proposed combinations
+- `GET /api/taco/status` — capabilities and missing prediction requirements
+- `GET /api/taco/evidence?topic=inputs` — curated source-linked evidence
+- `GET /api/taco/source-audit` — inspected upstream code/version discrepancies
+- `POST /api/taco/readiness` — metadata-only checks; never a model prediction
 - `POST /api/demo-reviews` — synthetic case only, no patient data
 - `/docs` — FastAPI's interactive API docs
 
 Run tests: `python -m pytest -q`
+
+Browser workflow check (Playwright plus Chromium or Microsoft Edge): `python tests/browser_check.py`. It exercises offline and backend-backed views, with HTTP requests routed through FastAPI's real handlers using TestClient. Regenerate the offline demo using `python scripts/build_demo.py`. See [TACO_AGENT.md](docs/TACO_AGENT.md) to install and connect the MCP server to a chat host.
 
 ## Design decisions reflected in the prototype
 
@@ -40,7 +49,7 @@ Run tests: `python -m pytest -q`
 3. **MR/CT/DCE:** researcher gene table shows only *presence among the two supporting methods* in SPLIT Table 3 for 11 multi-supported genes. It does **not** show per-method numerical ranks. Adding rank scores requires the actual validated model output files and harmonisation decisions from Sindy.
 4. **TACO:** model in the paper uses gene expression and pathway-based feature selection. **No symptom-only risk percentage is produced.** Symptom themes do not diagnose Long COVID, assign validated subtypes or provide a percentage probability.
 5. **SPLIT:** module entry refers to predicted drug safety, adverse events and efficacy by cohort. **Drug lists are research screening outputs, not treatment prescriptions.** No automatic prescription recommendation is implemented.
-6. **Paper2Agent:** informs a planned **v2** tool-calling agent. The v1 prototype shows illustrative proposed tool routes only. It does not call LLMs, run models or claim to have used their outputs.
+6. **Paper2Agent:** informs the first local TACO MCP server, exposing evidence, source audit, readiness and status tools. A separate MCP host supplies the LLM; its connection is not automatically installed. The website calls the same research tools through FastAPI. No scientific model has been executed; other example agent routes remain proposed.
 7. **Database:** demo server uses SQLite (zero setup). Production recommendation is PostgreSQL with migrations, explicit access controls and audited provenance.
 
 ## Provenance of seeded records

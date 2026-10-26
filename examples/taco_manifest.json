@@ -1,0 +1,11 @@
+{
+  "dataset_kind": "gene_expression",
+  "sample_count": 20,
+  "feature_count": 411,
+  "gene_id_namespace": "HGNC",
+  "sampling_time": "acute",
+  "preprocessing_documented": true,
+  "participant_split_documented": true,
+  "feature_selection_within_training_folds": true,
+  "feature_set_version": "fictional-example-v1"
+}

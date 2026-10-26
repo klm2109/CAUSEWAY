@@ -1,5 +1,13 @@
 # CAUSEWAY Platform: Proposed Architecture (Draft)
 
+## Implemented meeting additions
+
+The existing frontend uses plain HTML/CSS/JavaScript and FastAPI/SQLite. Patient history (symptoms, comorbidities and current medicines) stays only in browser memory and is shared with the Doctor view. The Doctor view explains the exact illustrative symptom-matching rule. Research method and pipeline metadata live in `static/research_catalogue.json`, read by the API and embedded in the generated offline demo.
+
+`taco_agent/core.py` implements evidence, source-audit, status and manifest-readiness functions. FastAPI exposes these under `/api/taco/`; `taco_agent/server.py` exposes the same functions using MCP over stdio. An MCP host provides the LLM. The host connection and scientific prediction execution remain separate, pending steps. The manifest tool accepts descriptions, not measurement files or patient records.
+
+The model below remains a future architecture, including React, PostgreSQL and validated scientific execution. These are not silently claimed as implemented.
+
 ```mermaid
 flowchart TB
   P[Patient view: symptom form] --> FE[React + TypeScript frontend]

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import json
 import sqlite3
 from contextlib import closing
 from pathlib import Path
@@ -11,9 +12,11 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
+from taco_agent.core import DatasetManifest, assess_readiness, evidence, execution_status, reference_audit
 
 BASE = Path(__file__).resolve().parent
 DB_PATH = Path(os.environ.get("CAUSEWAY_DB", str(BASE / "demo_evidence.db")))
+RESEARCH = json.loads((BASE / "static" / "research_catalogue.json").read_text(encoding="utf-8"))
 
 GENES = [
     ("ERCC3", "CT,MR", "DNA repair"),
@@ -90,6 +93,31 @@ def index():
 @app.get("/api/health")
 def health():
     return {"status": "ok", "mode": "synthetic-demo-not-clinical"}
+
+
+@app.get("/api/research-methods")
+def research_methods():
+    return RESEARCH
+
+
+@app.get("/api/taco/status")
+def taco_status():
+    return execution_status()
+
+
+@app.get("/api/taco/evidence")
+def taco_evidence(topic: Literal["overview", "inputs", "validation", "limitations", "all"] = "all"):
+    return evidence(topic)
+
+
+@app.get("/api/taco/source-audit")
+def taco_source_audit():
+    return reference_audit()
+
+
+@app.post("/api/taco/readiness")
+def taco_readiness(manifest: DatasetManifest):
+    return assess_readiness(manifest)
 
 
 @app.get("/api/catalogue")
