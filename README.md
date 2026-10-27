@@ -1,8 +1,15 @@
-# CAUSEWAY — Long COVID Atlas (v0.1 Meeting Prototype)
+# CAUSEWAY — Long COVID Atlas v2
 
 A clickable, **non-clinical** prototype for the Long COVID Atlas/CAUSEWAY concept from the meeting notes. It demonstrates three portal tabs, a shared evidence catalogue, cross-paper method planning and a first TACO evidence/readiness MCP server. It is **not** approved diagnostic, predictive, or prescribing software.
 
-The current work is tracked in [TASKS.md](TASKS.md). Start with the [beginner guide](docs/BEGINNER_GUIDE.md). The active scope is the TACO agent and portal updates; presentation work is skipped at your request.
+This is the second prototype release, **v2** (`2.0.0` in API and agent metadata). The current work is tracked in [TASKS.md](TASKS.md). Start with the [beginner guide](docs/BEGINNER_GUIDE.md). The active scope is the TACO agent and portal updates.
+
+## What v2 includes
+
+- Patient comorbidities and current medicines, shared with the Doctor Portal in the same browser session.
+- Doctor explanations showing which symptoms matched each illustrative theme rule.
+- Ten core research method components, eight reference/proposed combinations, a custom combination workbench and the Shiny explorer link.
+- Four working TACO evidence/readiness MCP tools, also available through the website's local API. Conversational host integration and scientific prediction execution remain pending.
 
 ## Fastest way to demo
 
@@ -17,7 +24,7 @@ Requires Python 3.10+ for the portal; Python 3.11+ for the optional MCP agent.
 Windows PowerShell:
 
 ```powershell
-cd CAUSEWAY_Atlas_v1
+# Open a terminal in the project folder first.
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -40,7 +47,21 @@ API routes:
 
 Run tests: `python -m pytest -q`
 
-Browser workflow check (Playwright plus Chromium or Microsoft Edge): `python tests/browser_check.py`. It exercises offline and backend-backed views, with HTTP requests routed through FastAPI's real handlers using TestClient. Regenerate the offline demo using `python scripts/build_demo.py`. See [TACO_AGENT.md](docs/TACO_AGENT.md) to install and connect the MCP server to a chat host.
+Browser workflow check (Playwright plus Chromium or Microsoft Edge): `python tests/browser_check.py`. It exercises offline and backend-backed views, with HTTP requests routed through FastAPI's real handlers using TestClient. The check uses a temporary database and leaves no screenshots or presentation files in the project. Regenerate the offline demo using `python scripts/build_demo.py`. See [TACO_AGENT.md](docs/TACO_AGENT.md) to install and connect the MCP server to a chat host.
+
+## Project files
+
+| Path | Purpose |
+|---|---|
+| `app.py`, `static/`, `requirements.txt` | Local website, API and runtime dependencies |
+| `taco_agent/`, `requirements-agent.txt` | Shared TACO research tools and optional MCP server |
+| `demo_evidence.db` | Local SQLite evidence and synthetic demo-review storage |
+| `CAUSEWAY_demo.html`, `scripts/build_demo.py` | Generated offline website and its rebuild script |
+| `examples/` | Fictional metadata for the readiness tool |
+| `tests/` | API, MCP and browser workflow checks |
+| `docs/`, `ARCHITECTURE.md`, `TASKS.md` | Usage guidance, current architecture and remaining work |
+
+Skipped presentation materials, presentation-only dependencies and scripts, and generated preview images have been removed from the website source tree. Python environments, Git history and the local evidence database are retained.
 
 ## Design decisions reflected in the prototype
 
@@ -68,7 +89,7 @@ Browser workflow check (Playwright plus Chromium or Microsoft Edge): `python tes
 | Data | PostgreSQL + SQLModel or SQLAlchemy + Alembic | Harmonised findings, gene ids, sources, evidence claims, reviews |
 | R compatibility | R and `Rscript` (isolated process/container) | Preserve MR/CT methods before reimplementing; avoid untrusted execution |
 | Jobs | Background worker (Celery/RQ when needed) | Long-running research jobs, not request-thread model inference |
-| Agent (v2) | LLM tool calls / MCP adapter (optional) | Query validated CAUSA tools, retrieve evidence, not generate scientific numbers |
+| Future agent integration | LLM tool calls connected to the existing MCP tools | Retrieve evidence and invoke scientific functions only after reference validation |
 | Auth | Institution-managed SSO/OIDC and audited RBAC | Real patient/clinician workflows **only after** ethics, security and privacy review |
 
 The offline HTML is a **design prototype**, not intended to replace the planned React frontend. It allows stakeholders to agree on requirements before introducing build complexity.
@@ -90,12 +111,12 @@ The **claim schema** must preserve distinct uncertainty types: a p-value, cross-
 ## Unanswered questions for Sindy / Thuc
 
 1. Which repository commits, model versions and output files are the *authoritative* baseline for the CAUSA package?
-2. Should v1 be an anonymous public research site or a restricted platform with patient/doctor accounts? Does institutional ethics approval cover personal symptom collection?
+2. Should v2 evolve into an anonymous public research site or a restricted platform with patient/doctor accounts? Does institutional ethics approval cover personal symptom collection?
 3. Which fields are mandatory in the **claim schema**, and how will uncertainty and evidence strength be defined per method?
 4. Is there a validated **symptom-only** patient risk or subtype model? If not, should percentage prediction be deferred or presented as unavailable until a clinical pipeline exists?
 5. Is a clinician supposed to review patient intake, AI statements or a formal diagnosis? What is the escalation and override procedure?
 6. For drug evidence, should the interface prioritise *avoid-list* flags or show all ranked candidates with cohort-specific safety and efficacy?
-7. Should v1 display **precomputed** outputs only, or should it launch analysis jobs through CAUSA?
+7. Should v2 display **precomputed** outputs only, or should a later extension launch analysis jobs through CAUSA?
 8. For MR/CT/DCE, what numeric score normalization is scientifically appropriate for side-by-side rankings? Are missing scores zero, null, or not applicable?
 
 ## Next practical steps

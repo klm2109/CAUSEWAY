@@ -7,5 +7,5 @@
   "preprocessing_documented": true,
   "participant_split_documented": true,
   "feature_selection_within_training_folds": true,
-  "feature_set_version": "fictional-example-v1"
+  "feature_set_version": "fictional-example-v2"
 }

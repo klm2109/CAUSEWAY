@@ -6,7 +6,11 @@ client = TestClient(app)
 
 
 def test_health_and_catalogue():
-    assert client.get("/api/health").json()["status"] == "ok"
+    health = client.get("/api/health").json()
+    assert health["status"] == "ok"
+    assert health["version"] == "2.0.0"
+    assert client.get("/openapi.json").json()["info"]["version"] == health["version"]
+    assert client.get("/api/taco/status").json()["agent_version"] == health["version"]
     data = client.get("/api/catalogue").json()
     assert len(data["genes"]) == 11
     assert len(data["modules"]) == 5

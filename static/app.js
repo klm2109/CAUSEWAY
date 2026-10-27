@@ -213,7 +213,7 @@
     ]
   };
   function updateAgent() {
-    $("agent-route").innerHTML = agentPlans[state.agentQuestion].map(([title,desc],i)=>`<div class="flow-step"><span class="flow-step-number">${i+1}</span><div><b>${esc(title)}</b><small>${esc(desc)}</small></div></div>${i===2?"":'<div class="flow-arrow">↓</div>'}`).join("") + `<div class="agent-warning">AI agent not connected in v1. Future answers must call the validated CAUSA package, retain source citations and describe uncertainty.</div>`;
+    $("agent-route").innerHTML = agentPlans[state.agentQuestion].map(([title,desc],i)=>`<div class="flow-step"><span class="flow-step-number">${i+1}</span><div><b>${esc(title)}</b><small>${esc(desc)}</small></div></div>${i===2?"":'<div class="flow-arrow">↓</div>'}`).join("") + `<div class="agent-warning">In v2, TACO evidence and readiness tools are available. These other routes remain proposals; a conversational assistant and scientific model execution are not connected.</div>`;
   }
   function showTab(tab) {
     state.tab = tab;
@@ -284,7 +284,7 @@
   }
   async function init() {
     renderSymptoms();renderHistory();wire();updatePatient();updateDoctor();renderTables();updateAgent();
-    $("taco-manifest").value=JSON.stringify({dataset_kind:"gene_expression",sample_count:20,feature_count:411,gene_id_namespace:"HGNC",sampling_time:"acute",preprocessing_documented:true,participant_split_documented:true,feature_selection_within_training_folds:true,feature_set_version:"fictional-example-v1"},null,2);
+    $("taco-manifest").value=JSON.stringify({dataset_kind:"gene_expression",sample_count:20,feature_count:411,gene_id_namespace:"HGNC",sampling_time:"acute",preprocessing_documented:true,participant_split_documented:true,feature_selection_within_training_folds:true,feature_set_version:"fictional-example-v2"},null,2);
     try {
       const embedded=$("research-data");
       if (embedded) research=JSON.parse(embedded.textContent);

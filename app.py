@@ -1,4 +1,4 @@
-"""CAUSEWAY Atlas v1 meeting prototype: research evidence only, NO clinical prediction."""
+"""CAUSEWAY Atlas v2 research prototype: evidence tools, NO clinical prediction."""
 from __future__ import annotations
 
 import os
@@ -12,6 +12,7 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
+from taco_agent import __version__
 from taco_agent.core import DatasetManifest, assess_readiness, evidence, execution_status, reference_audit
 
 BASE = Path(__file__).resolve().parent
@@ -46,7 +47,7 @@ MODULES = [
     ("Paper2Agent", "AI agent architecture", "Papers, code, datasets, validated tools", "Reference for research tool-calling agents", "Paper2Agent.pdf", "https://github.com/jmiao24/Paper2Agent"),
 ]
 
-app = FastAPI(title="CAUSEWAY Atlas Prototype", version="0.1.0", description="Non-clinical demonstration API for research evidence and synthetic review actions")
+app = FastAPI(title="CAUSEWAY Atlas v2 Prototype", version=__version__, description="Non-clinical demonstration API for research evidence and synthetic review actions")
 
 
 def conn() -> sqlite3.Connection:
@@ -92,7 +93,7 @@ def index():
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "mode": "synthetic-demo-not-clinical"}
+    return {"status": "ok", "version": __version__, "mode": "synthetic-demo-not-clinical"}
 
 
 @app.get("/api/research-methods")

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CAUSEWAY — Long COVID Atlas | Prototype</title>
+  <title>CAUSEWAY — Long COVID Atlas v2 | Research Prototype</title>
   <meta name="description" content="Non-clinical research interface prototype for Long COVID evidence, clinician review and research exploration.">
   <link rel="stylesheet" href="/static/styles.css">
   <link rel="stylesheet" href="/static/updates.css">
@@ -24,7 +24,7 @@
     <div class="module-link"><span class="module-dot blue"></span> TACO prediction</div>
     <div class="module-link"><span class="module-dot amber"></span> SPLIT drug ranking</div>
     <div class="module-link"><span class="module-dot teal"></span> REVIEW evidence</div>
-    <div class="sidebar-bottom"><span class="pulse-dot"></span><div><b>Meeting prototype · v0.1</b><small id="data-status">Demo evidence catalogue</small></div></div>
+    <div class="sidebar-bottom"><span class="pulse-dot"></span><div><b>Research prototype · v2</b><small id="data-status">Demo evidence catalogue</small></div></div>
   </aside>
   <main class="main">
     <header class="topbar"><div class="crumb">CAUSEWAY <span>/</span> <strong id="crumb-label">Patient portal</strong></div><div class="topbar-actions"><span class="tag outline"><span class="pulse-dot mini"></span> Research prototype</span><a class="icon-link" href="https://github.com/SindyPin/Causal-Multiomics-Method" target="_blank" rel="noopener noreferrer" title="Causal-Multiomics GitHub">↗</a></div></header>
@@ -59,7 +59,7 @@
         <section class="panel"><div id="doctor-explanation" aria-live="polite"></div><div class="subtle-card"><b>What is being explained?</b> The symptom-checkbox rule is an illustrative interface design. The paper's subtypes were derived from molecular expression profiles, then interpreted using symptoms. Counts below are matching symptoms, not probabilities or feature importance. Comorbidities and medicines are review context and do not change these rules.</div><p class="field-help">TACO has not run for this case. Patient-level model attribution, calibration and a risk explanation are unavailable.</p><a class="source-url" href="https://doi.org/10.1371/journal.pcbi.1013725" target="_blank" rel="noopener noreferrer">Read the subtype study ↗</a></section>
       </section>
       <section id="tab-researcher" class="tab-panel hidden" aria-label="Researcher portal">
-        <div class="page-heading"><div><div class="eyebrow">RESEARCH WORKSPACE <span class="eyebrow-divider">/</span> ATLAS V1</div><h1>Explore methods.<br><em>Trace every claim.</em></h1><p>Query harmonised evidence across published methods. This prototype illustrates the catalogue and provenance layer; it does not execute scientific models.</p></div><span class="page-mark">⌬</span></div>
+        <div class="page-heading"><div><div class="eyebrow">RESEARCH WORKSPACE <span class="eyebrow-divider">/</span> ATLAS V2</div><h1>Explore methods.<br><em>Trace every claim.</em></h1><p>Query harmonised evidence across published methods. This prototype illustrates the catalogue and provenance layer; it does not execute scientific models.</p></div><span class="page-mark">⌬</span></div>
         <div class="stat-row four"><div class="stat-card"><span>Scientific evidence modules</span><strong>04</strong><small>Plus Paper2Agent architecture</small></div><div class="stat-card"><span>Genes in table</span><strong>11</strong><small>Cross-method subset from SPLIT</small></div><div class="stat-card"><span>Review coverage</span><strong>101</strong><small>Omics studies reviewed</small></div><div class="stat-card"><span>TACO agent tools</span><strong>04</strong><small>Evidence and readiness; model not run</small></div></div>
         <section class="panel resource-callout"><div><div class="eyebrow muted">KEY RESEARCH RESOURCE</div><h3>Explore the authors' MR / Control Shiny application</h3><p>Open the existing research explorer alongside CAUSEWAY. External results are not imported into this prototype.</p><small>Live contents could not be verified by the research browser.</small></div><a id="shiny-link" class="button primary" href="https://sindypin.shinyapps.io/github/" target="_blank" rel="noopener noreferrer">Open Shiny explorer ↗</a></section>
         <div class="section-head researcher-head"><div><div class="eyebrow muted">EVIDENCE FOUNDATION</div><h2>Source and module catalogue</h2><p>Each result must retain its method, source and dataset context.</p></div></div>
@@ -78,7 +78,7 @@
         <div class="section-head researcher-head"><div><div class="eyebrow muted">OTHER FUTURE WORKFLOWS</div><h2>Research agent · proposed routes</h2><p>Select a question to see a future tool workflow. These routes are plans, not executed analyses.</p></div></div>
         <section class="agent-grid"><div class="panel"><div class="panel-header"><div><h3>Example researcher questions</h3><p>Planned tool-calling workflows</p></div><span class="tag lilac">V2 design</span></div><div class="sample-questions"><button class="question active" data-question="genes">Compare MR, CT and DCE evidence for STAT3 <span>↗</span></button><button class="question" data-question="subtypes">How do the reported Long COVID subtypes differ? <span>↗</span></button><button class="question" data-question="drugs">Compare SPLIT drug rankings by cohort <span>↗</span></button><button class="question" data-question="prediction">Evaluate TACO model validation and limitations <span>↗</span></button></div></div><div class="panel agent-flow"><div class="panel-header"><div><h3>Proposed agent route</h3><p>Tool plan only · not executed</p></div><span class="tag soft">Read-only</span></div><div id="agent-route"></div></div></section>
       </section>
-      <footer class="footer"><span>CAUSEWAY / LONG COVID ATLAS <b>v0.1 prototype</b></span><span>Research exploration only · Not a diagnostic or prescribing tool</span></footer>
+      <footer class="footer"><span>CAUSEWAY / LONG COVID ATLAS <b>v2 research prototype</b></span><span>Research exploration only · Not a diagnostic or prescribing tool</span></footer>
     </div>
   </main>
 </div>

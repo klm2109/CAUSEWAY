@@ -1,8 +1,8 @@
-# CAUSEWAY meeting tasks
+# CAUSEWAY Atlas v2 tasks
 
 Requested order: complete each step and explain it in beginner-friendly language.
 
-- **1. Presentation — skipped at your request.** Existing presentation files remain available as optional reference material. Paper2Agent remains a research reference for the TACO agent.
+- **1. Presentation — skipped at your request.** Presentation artifacts and their build tools have been removed from the website source tree. Paper2Agent remains a research reference for the TACO agent.
 - [ ] **2. Create the first TACO AI agent.** The four evidence/readiness tools, MCP server, resource and workflow prompt are implemented and tested. A conversational MCP host still needs to be connected. Scientific prediction execution remains pending because the upstream model definition, versions and reproducible outputs need resolution. See [the agent guide](docs/TACO_AGENT.md).
 - [x] **3. Add comorbidities and current medicines to Patient Portal.** Add/remove fictional entries; distinguish none from unknown; share with Doctor Portal in the current browser session.
 - [x] **4. Add a cross-paper method comparison table to Researcher Portal.** Compare 10 core components across causal discovery, subtyping, early detection, drug repurposing, evidence synthesis and orchestration. The table covers the linked project modules, not every algorithm in REVIEW's 101 cited studies or every TACO benchmark model.

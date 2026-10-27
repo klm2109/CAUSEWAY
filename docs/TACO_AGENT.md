@@ -1,6 +1,6 @@
-# First TACO research agent
+# CAUSEWAY v2 TACO research tools
 
-This version provides working **research evidence and dataset-description tools**. An MCP-compatible chat host supplies the AI model. The website can call the same tools directly, but has no LLM chat connection. Prediction execution has not been implemented or validated.
+Release **v2** (`2.0.0`) provides working **research evidence and dataset-description tools**. An MCP-compatible chat host supplies the AI model. The website can call the same tools directly, but has no LLM chat connection. Prediction execution has not been implemented or validated.
 
 ## What an agent means here
 
@@ -20,13 +20,13 @@ Start the server through an MCP host using:
 
 It uses standard input/output for MCP messages, so it will wait silently when started by itself. That is expected. Its working directory must be the project root.
 
-For a Codex MCP connection, the following is a **configuration example**, not an automatically installed connection. Use the absolute project path on this machine, or adjust it for another computer:
+For a Codex MCP connection, the following is a **configuration template**, not an automatically installed connection. Replace `C:\path\to\CAUSEWAY` with the absolute path of your actual project folder. The v2 release does not require renaming that folder:
 
 ```toml
 [mcp_servers.causeway_taco]
-command = 'C:\Users\Minh Khoi\Desktop\CAUSEWAY_Atlas_v1\.venv\Scripts\python.exe'
+command = 'C:\path\to\CAUSEWAY\.venv\Scripts\python.exe'
 args = ['-m', 'taco_agent.server']
-cwd = 'C:\Users\Minh Khoi\Desktop\CAUSEWAY_Atlas_v1'
+cwd = 'C:\path\to\CAUSEWAY'
 ```
 
 Add this to the active Codex MCP configuration when you want the chat host to use it, then reconnect/restart the host. No existing global Codex configuration was changed by this implementation.

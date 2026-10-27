@@ -1,4 +1,4 @@
-"""Run with python -m taco_agent.server; an MCP host supplies the LLM."""
+"""CAUSEWAY v2 MCP tools; run python -m taco_agent.server with an LLM host."""
 from __future__ import annotations
 
 import json
@@ -9,7 +9,7 @@ from mcp.types import ToolAnnotations
 
 from taco_agent.core import DatasetManifest, assess_readiness, evidence, execution_status, reference_audit
 
-mcp = FastMCP("CAUSEWAY TACO Research Assistant", instructions="Use the tools for sourced TACO evidence and dataset readiness. No prediction model is connected. Never infer patient risk from symptoms or present metadata checks as scientific validation.")
+mcp = FastMCP("CAUSEWAY TACO Research Assistant v2", instructions="Use the tools for sourced TACO evidence and dataset readiness. No prediction model is connected. Never infer patient risk from symptoms or present metadata checks as scientific validation.")
 READ_ONLY = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
 
 

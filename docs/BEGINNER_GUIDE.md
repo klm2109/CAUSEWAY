@@ -1,22 +1,12 @@
-# Your CAUSEWAY tasks, explained step by step
+# CAUSEWAY Atlas v2, explained step by step
 
-## 1. Understand Paper2Agent and prepare the meeting
+## 1. Understand the Paper2Agent reference
 
-**Presentation skipped at your request.** Continue with step 2 for the TACO agent. The existing materials below are optional references.
+**Presentation skipped at your request.** The website source tree now contains the application, research tools, examples, tests and usage documentation. The current release is **v2**; its API and agent metadata report `2.0.0`.
 
 A research paper describes a method. Its repository contains the code that implements it. To use that method, someone normally has to understand the code, install dependencies and prepare data.
 
-The Paper2Agent reading is summarised in slides 2–4 of the [meeting deck](meeting/Paper2Agent_CAUSEWAY.html). Slides 5–12 are our CAUSEWAY proposal. This distinction matters: our TACO agent is not a result reported by the Paper2Agent authors.
-
-Deliverables:
-
-- [Editable PowerPoint](meeting/Paper2Agent_CAUSEWAY.pptx)
-- [Browser slides](meeting/Paper2Agent_CAUSEWAY.html)
-- [Shareable PDF](meeting/Paper2Agent_CAUSEWAY.pdf)
-- [Speaker notes](meeting/speaker_notes.md)
-- Editable slide content: `docs/paper2agent_slides.json`
-
-Allow about ten minutes. Open the PowerPoint normally and use Presenter View to see notes. In the browser edition, each slide has an expandable **Speaker notes** section and can be printed.
+The [Paper2Agent paper](https://arxiv.org/abs/2509.06917v2) provides the reference for connecting an assistant to research tools. Our TACO implementation applies that idea to the CAUSEWAY project; it is not a result reported by the Paper2Agent authors.
 
 ## 2. Build a first TACO agent
 
@@ -116,13 +106,6 @@ If you edit the portal sources, rebuild the standalone file:
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/build_demo.py
-```
-
-If you edit the slide JSON, rebuild the presentation:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-presentation.txt
-.\.venv\Scripts\python.exe scripts/build_presentation.py
 ```
 
 ## Next research milestone

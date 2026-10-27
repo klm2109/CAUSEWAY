@@ -5,6 +5,7 @@ from copy import deepcopy
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
+from taco_agent import __version__
 
 SOURCE_DATE = "2026-10-26"
 SOURCES = [
@@ -38,7 +39,7 @@ class DatasetManifest(BaseModel):
 
 def execution_status() -> dict:
     return {
-        "agent_version": "0.1.0",
+        "agent_version": __version__,
         "mode": "research-evidence-and-readiness",
         "available_tools": ["taco_evidence", "assess_taco_readiness", "get_execution_status", "inspect_reference_implementation"],
         "llm_location": "Provided by the MCP host; no LLM runs in the website or this server.",
