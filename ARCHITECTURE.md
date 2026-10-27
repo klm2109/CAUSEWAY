@@ -6,7 +6,7 @@ The existing frontend uses plain HTML/CSS/JavaScript and FastAPI/SQLite. Patient
 
 The application and TACO tools share release version `2.0.0` from `taco_agent/__init__.py`. The website displays **v2**. `/api/health`, OpenAPI metadata and `/api/taco/status` expose the same release version.
 
-`taco_agent/core.py` implements evidence, source-audit, status and manifest-readiness functions. FastAPI exposes these under `/api/taco/`; `taco_agent/server.py` exposes the same functions using MCP over stdio. An MCP host provides the LLM. The host connection and scientific prediction execution remain separate, pending steps. The manifest tool accepts descriptions, not measurement files or patient records.
+`taco_agent/core.py` implements evidence, source-audit, status and manifest-readiness functions. FastAPI exposes these under `/api/taco/`; `taco_agent/server.py` exposes the same functions using MCP over stdio. `taco_agent/chat.py` configures an independent Codex-hosted conversation for each question, validates declared metadata before the host call, and checks tool events, citations and readiness verdicts after it. Website chat integration and scientific prediction execution remain pending. The manifest tool accepts descriptions, not measurement files or patient records.
 
 ```mermaid
 flowchart TB
@@ -18,7 +18,10 @@ flowchart TB
   API --> DB[(SQLite evidence and synthetic review decisions)]
   API --> T[TACO evidence, readiness, source audit and status]
   M[MCP stdio server] --> T
-  H[Conversational host: not connected] -.-> M
+  Q[Terminal question and optional manifest] --> L[Python conversational launcher]
+  L --> H[Signed-in Codex language-model host]
+  H --> M
+  H --> V[Python trace and response checks]
 ```
 
 ## Future production architecture

@@ -3,11 +3,13 @@
 Requested order: complete each step and explain it in beginner-friendly language.
 
 - **1. Presentation — skipped at your request.** Presentation artifacts and their build tools have been removed from the website source tree. Paper2Agent remains a research reference for the TACO agent.
-- [ ] **2. Create the first TACO AI agent.** The four evidence/readiness tools, MCP server, resource and workflow prompt are implemented and tested. A conversational MCP host still needs to be connected. Scientific prediction execution remains pending because the upstream model definition, versions and reproducible outputs need resolution. See [the agent guide](docs/TACO_AGENT.md).
+- [x] **2. Create the first conversational TACO research agent.** `python -m taco_agent.chat` connects the existing Codex login to the four Python MCP tools for each terminal question. Live checks covered input requirements, complete fictional molecular metadata and symptoms-only metadata. Python verifies tool completions, source URLs, manifest preservation and readiness verdicts. Website chat and scientific prediction execution remain unavailable. See [the agent guide](docs/TACO_AGENT.md).
 - [x] **3. Add comorbidities and current medicines to Patient Portal.** Add/remove fictional entries; distinguish none from unknown; share with Doctor Portal in the current browser session.
 - [x] **4. Add a cross-paper method comparison table to Researcher Portal.** Compare 10 core components across causal discovery, subtyping, early detection, drug repurposing, evidence synthesis and orchestration. The table covers the linked project modules, not every algorithm in REVIEW's 101 cited studies or every TACO benchmark model.
 - [x] **5. Add interpretability to Doctor Portal.** Show exact matching symptoms and the interface rule. Model attribution is unavailable because no patient prediction is executed.
 - [x] **6. Add method combinations to Researcher Portal.** Eight reference/proposed workflows, including all five modules together, plus arbitrary session combinations and a select-all button. Show source, status, compatibility requirements and how each task should be evaluated. No combination is executed.
+
+- [ ] **Next ML milestone: reproduce the authoritative TACO experiment.** Confirm the upstream commit, model / ensemble definition, preprocessing, feature set, reference data and expected outputs; then evaluate participant splits, leakage and predictive performance before exposing scientific execution through the agent.
 
 Key resource: [Sindy's Shiny explorer](https://sindypin.shinyapps.io/github/). It is prominently linked in Researcher Portal. The research browser could not inspect the live app; the associated [published study](https://doi.org/10.1371/journal.pcbi.1013725) supplies the methodological context.
 

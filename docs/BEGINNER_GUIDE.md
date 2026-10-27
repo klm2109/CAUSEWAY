@@ -35,6 +35,14 @@ Four functions are implemented:
 
 These are functioning tools, not a functioning scientific prediction model. The browser buttons call the same functions through the local API. The browser does not contain an LLM. To talk to the tools in natural language, connect an MCP-compatible assistant using [the setup guide](TACO_AGENT.md).
 
+The Python terminal launcher now makes that connection for one question at a time using the existing Codex login:
+
+```powershell
+.\.venv\Scripts\python.exe -m taco_agent.chat "What data does TACO require?" --trace
+```
+
+The language model chooses tools and explains their results. Python checks the supplied metadata, calls the host, and verifies the completed tool events and source URLs. This is agent orchestration, not model training. Each command starts a fresh question; use `--manifest examples/taco_manifest.json` to supply a fictional dataset description. The [agent guide](TACO_AGENT.md) has positive and symptoms-only examples.
+
 The readiness example is **fictional metadata**: it says what kind of dataset you propose to use. A checklist can confirm that you supplied a gene identifier system or a split description. It cannot verify the data's quality, reproduce the paper, or calculate someone's risk.
 
 Why prediction is still pending: the inspected README specifies TabPFN 2.0.9, while the prediction requirements specify 2.2.1. The notebook also labels an ensemble as TACO. We need an agreed reference, a compatible isolated environment, and matching reference outputs before adding execution. The file hashes and exact observations are recorded in the agent guide.

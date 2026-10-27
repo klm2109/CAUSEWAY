@@ -1,0 +1,11 @@
+{
+  "dataset_kind": "symptom_only",
+  "sample_count": 20,
+  "feature_count": 12,
+  "gene_id_namespace": "unknown",
+  "sampling_time": "acute",
+  "preprocessing_documented": true,
+  "participant_split_documented": true,
+  "feature_selection_within_training_folds": true,
+  "feature_set_version": "fictional-symptom-checklist-v2"
+}

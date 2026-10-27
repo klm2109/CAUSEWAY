@@ -9,7 +9,7 @@ This is the second prototype release, **v2** (`2.0.0` in API and agent metadata)
 - Patient comorbidities and current medicines, shared with the Doctor Portal in the same browser session.
 - Doctor explanations showing which symptoms matched each illustrative theme rule.
 - Ten core research method components, eight reference/proposed combinations, a custom combination workbench and the Shiny explorer link.
-- Four working TACO evidence/readiness MCP tools, also available through the website's local API. Conversational host integration and scientific prediction execution remain pending.
+- Four working TACO evidence/readiness MCP tools, also available through the website's local API, plus a Python terminal agent using the existing Codex login. Website chat integration and scientific prediction execution remain pending.
 
 ## Fastest way to demo
 
@@ -49,6 +49,17 @@ Run tests: `python -m pytest -q`
 
 Browser workflow check (Playwright plus Chromium or Microsoft Edge): `python tests/browser_check.py`. It exercises offline and backend-backed views, with HTTP requests routed through FastAPI's real handlers using TestClient. The check uses a temporary database and leaves no screenshots or presentation files in the project. Regenerate the offline demo using `python scripts/build_demo.py`. See [TACO_AGENT.md](docs/TACO_AGENT.md) to install and connect the MCP server to a chat host.
 
+## Ask the TACO research agent
+
+With `requirements-agent.txt` installed and the local Codex CLI signed in:
+
+```powershell
+.\.venv\Scripts\python.exe -m taco_agent.chat "What data does TACO require?" --trace
+.\.venv\Scripts\python.exe -m taco_agent.chat "Can this dataset be used with TACO?" --manifest examples/taco_manifest.json --trace
+```
+
+Python validates the metadata, configures the MCP connection for that question, and checks the host's actual tool trace and cited sources. Codex supplies the language model. Each command is an independent turn; no model is trained or used for scientific prediction. See [the agent guide](docs/TACO_AGENT.md) for a symptoms-only example and the distinction between software checks and ML validation. No website design changes are required to use this terminal agent.
+
 ## Project files
 
 | Path | Purpose |
@@ -70,7 +81,7 @@ Skipped presentation materials, presentation-only dependencies and scripts, and 
 3. **MR/CT/DCE:** researcher gene table shows only *presence among the two supporting methods* in SPLIT Table 3 for 11 multi-supported genes. It does **not** show per-method numerical ranks. Adding rank scores requires the actual validated model output files and harmonisation decisions from Sindy.
 4. **TACO:** model in the paper uses gene expression and pathway-based feature selection. **No symptom-only risk percentage is produced.** Symptom themes do not diagnose Long COVID, assign validated subtypes or provide a percentage probability.
 5. **SPLIT:** module entry refers to predicted drug safety, adverse events and efficacy by cohort. **Drug lists are research screening outputs, not treatment prescriptions.** No automatic prescription recommendation is implemented.
-6. **Paper2Agent:** informs the first local TACO MCP server, exposing evidence, source audit, readiness and status tools. A separate MCP host supplies the LLM; its connection is not automatically installed. The website calls the same research tools through FastAPI. No scientific model has been executed; other example agent routes remain proposed.
+6. **Paper2Agent:** informs the local TACO MCP server and Python conversational launcher, exposing evidence, source audit, readiness and status tools. The launcher configures Codex as the host for each terminal question; it does not install a persistent chat-panel connection. The website calls the same research tools through FastAPI. No scientific model has been executed; other example agent routes remain proposed.
 7. **Database:** demo server uses SQLite (zero setup). Production recommendation is PostgreSQL with migrations, explicit access controls and audited provenance.
 
 ## Provenance of seeded records

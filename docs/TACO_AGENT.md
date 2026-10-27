@@ -1,6 +1,45 @@
 # CAUSEWAY v2 TACO research tools
 
-Release **v2** (`2.0.0`) provides working **research evidence and dataset-description tools**. An MCP-compatible chat host supplies the AI model. The website can call the same tools directly, but has no LLM chat connection. Prediction execution has not been implemented or validated.
+Release **v2** (`2.0.0`) provides working **research evidence and dataset-description tools** and a Python terminal launcher for a conversational research agent. The launcher uses the installed, signed-in Codex CLI as its language-model host. The website can call the same tools directly, but has no LLM chat connection. Scientific prediction execution has not been implemented or validated.
+
+## Ask the conversational agent from Python
+
+The environment needs the agent dependencies, an installed Codex CLI, an existing Codex login and network access. On Windows, check the login with `codex.cmd login status`; `codex.cmd login` signs in if needed. The `.cmd` launcher avoids PowerShell script execution-policy problems without changing the execution policy.
+
+From the project directory:
+
+```powershell
+.\.venv\Scripts\python.exe -m taco_agent.chat "What data does TACO require?" --trace
+```
+
+Check the complete fictional molecular-data description:
+
+```powershell
+.\.venv\Scripts\python.exe -m taco_agent.chat "Do these metadata meet the checks, and can I run a prediction now?" --manifest examples/taco_manifest.json --trace
+```
+
+Compare it with a fictional symptoms-only description:
+
+```powershell
+.\.venv\Scripts\python.exe -m taco_agent.chat "Can this symptoms-only dataset be used with TACO?" --manifest examples/taco_manifest_symptom_only.json --trace
+```
+
+Each invocation is one independent question. It does not remember a previous invocation; supply the manifest again when needed. `--trace` displays completed Python tool names, not hidden model reasoning. `--json` returns the verified answer and trace as machine-readable JSON.
+
+The launcher configures this run's local MCP server and keeps the host's model selection and login. It does not save or change global/project Codex configuration. No separate OpenAI API key is required for this existing ChatGPT-authenticated Codex host. Model requests use that account's available Codex access.
+
+## What happens during a question
+
+1. Python validates any supplied JSON against `DatasetManifest`. Unknown fields such as participant records are rejected before being sent to the host.
+2. Codex receives the question, metadata if supplied, and instructions for the research task.
+3. The host discovers the four MCP tools, calls status, then selects the relevant evidence/audit/readiness tool.
+4. The tools execute ordinary Python functions and return structured results.
+5. The language model writes a structured answer.
+6. Python checks the actual tool-completion events, returned source URLs, unchanged manifest and readiness verdict before displaying it.
+
+The launcher disables shell, app integrations, web search and multi-agent collaboration for this run, uses a read-only sandbox, requires the TACO MCP connection and accepts traces only from the four expected tools. It supplies the research rules as host developer instructions. It rejects failed tools, invented citations, changed manifests and inconsistent structured readiness/model-execution fields. These checks improve traceability; they do not prove that every sentence in an answer is scientifically correct. Human review remains necessary.
+
+The [official non-interactive Codex documentation](https://learn.chatgpt.com/docs/non-interactive-mode) describes the CLI's JSON events, ephemeral runs and output-schema support used here.
 
 ## What an agent means here
 
@@ -20,7 +59,7 @@ Start the server through an MCP host using:
 
 It uses standard input/output for MCP messages, so it will wait silently when started by itself. That is expected. Its working directory must be the project root.
 
-For a Codex MCP connection, the following is a **configuration template**, not an automatically installed connection. Replace `C:\path\to\CAUSEWAY` with the absolute path of your actual project folder. The v2 release does not require renaming that folder:
+For an optional persistent connection in the Codex chat panel, the following is a **configuration template**, not an automatically installed connection. The Python launcher above does not need this manual setup. Replace `C:\path\to\CAUSEWAY` with the absolute path of your actual project folder. The v2 release does not require renaming that folder:
 
 ```toml
 [mcp_servers.causeway_taco]
